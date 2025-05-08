@@ -1,0 +1,23 @@
+.title{
+  color: black;
+}
+.email_container{
+  display: block;
+  margin-top: 50px;
+  width: 500px; 
+  border: 1px solid rgb(161, 160, 160);
+  padding: 20px;
+  margin-left: calc(50% - 250px);
+  border-radius: 6px;
+  text-align: center;
+  label{
+    float: left;
+    margin-bottom: 5px;
+    width: 100%;
+    color: rgb(35, 35, 35);
+    text-align: left;
+  }
+}
+.email_container_input{
+  margin-top: 5px;
+}
