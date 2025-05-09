@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress';
 import Info from './Info.jsx';
 import ModalText from './ModalText.jsx';
-import tommyAvatar from '../assets/cucuAvatar.png';
+import tommyAvatar from '../assets/cucuFrog.png';
 
 import { extractTaggedContent, formatFixTags, removeFixTags } from '../utils/extractTagsFromPrompt.js';
 
@@ -19,7 +19,6 @@ import {
 } from "../services/apiService";
 
 import './Story.css'
-import { Icon } from '@mui/material';
 
 function Home() {
   const location = useLocation();
@@ -43,6 +42,8 @@ function Home() {
 
   const [ storyIdSaved, setStoryIdSaved ] = useState('');
 
+  const [ storyTitle, setStoryTitle ] = useState('');
+
   const handleResize = () => {
     const mobile = window.innerWidth <= 768;
     setIsMobile(mobile);
@@ -59,8 +60,13 @@ function Home() {
   const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
 
+  const _handleChangeTitle = (value) => {
+    console.log(value);
+    
+  }
+
   const _handleSendResponses = async () => {
-    if (textValueToResponse !== '') {
+    if (textValueToResponse !== '' && storyTitle !== '') {
       let prompt = '';
       if (agentQuestion !== '¿Cómo inicia la historia?') {
         prompt = `
@@ -68,27 +74,27 @@ function Home() {
           <inicio>${agentResponse ? removeFixTags(agentResponse?.inicio): ''}<inicio>.
           <nudo>${agentResponse ? removeFixTags(agentResponse?.nudo): ''}<nudo>.
           <desenlace>${agentResponse ? removeFixTags(agentResponse?.desenlace): ''}<desenlace>
-          <r1>(${agentQuestion}),(${textValueToResponse})<r1>"
+          <r>(${agentQuestion}),(${textValueToResponse})<r>"
         `;
-        if (agentResponse === '' || agentResponse?.respuesta[stage][0]?.includes('true:')) {
+        if (agentResponse === '' || agentResponse?.respuesta[stage]?.[0]?.includes('true:')) {
           console.log(agentResponse, agentResponse !== '' ? agentResponse?.respuesta[stage][0]?.includes('true:'): '', stage);
           prompt = `
             Etapa ${stage}.
             <inicio>${stage === 'inicio' ? (`${textValueToResponse}`) : (agentResponse ? removeFixTags(agentResponse?.inicio): '')}<inicio>.
             <nudo>${stage === 'nudo' ? (`${textValueToResponse}`) : (agentResponse ? removeFixTags(agentResponse?.nudo): '')}<nudo>.
             <desenlace>${stage === 'desenlace' ? (`${textValueToResponse}`) : (agentResponse ? removeFixTags(agentResponse?.desenlace): '')}<desenlace>
-            <r1><r1>"
+            <r><r>"
           `;
         }
       } else {
-        const response = await saveStory(email, 'mi primer historia');
+        const response = await saveStory(email, storyTitle);
         setStoryIdSaved(response.storyId);
         prompt = `
           Etapa inicio.
           <inicio><inicio>.
           <nudo><nudo>.
           <desenlace><desenlace>
-          <r1>(¿Cómo inicia la historia?),(${textValueToResponse})<r1>"
+          <r>(¿Cómo inicia la historia?),(${textValueToResponse})<r>"
         `;
       }
       setLoadingAnswer(true);
@@ -97,9 +103,13 @@ function Home() {
       let responseFormat = extractTaggedContent(response.output);
 
       try {
-        console.log(responseFormat, responseFormat !== '' ? responseFormat?.respuesta[stage][0].includes('true') : '', agentResponse !== '' ? agentResponse.respuesta[stage]: '');
+        console.log(responseFormat);
+        
+        console.log(responseFormat, responseFormat !== '' ? responseFormat?.respuesta[stage]?.[0]?.includes('true') : '', agentResponse !== '' ? agentResponse.respuesta[stage]: '');
+        console.log(responseFormat);
+        
         setAgentResponse(responseFormat);
-        setAgentQuestion(responseFormat?.q1[0]);
+        setAgentQuestion(responseFormat?.q[0]);
         if (responseFormat !== '' && responseFormat?.respuesta[stage][0].includes('true:')) {
           if (stage === 'inicio') {
             setLoadingImage(true);
@@ -115,8 +125,11 @@ function Home() {
           } else if(stage === 'nudo') {
             setLoadingImage(true);
             const responseImage01 = await generateFollowedImage(
-              email+storyIdSaved+stage,
-              userActualStory
+              email+storyIdSaved+"inicio",
+              userActualStory,
+              email,
+              storyIdSaved,
+              stage
             );
             console.log(responseImage01);
             setLoadingImage(false);
@@ -124,8 +137,11 @@ function Home() {
           } else {
             setLoadingImage(true);
             const responseImage01 = await generateFollowedImage(
-              email+storyIdSaved+stage,
-              userActualStory
+              email+storyIdSaved+"nudo",
+              userActualStory,
+              email,
+              storyIdSaved,
+              stage
             );
             console.log(responseImage01);
             setLoadingImage(false);
@@ -151,11 +167,15 @@ function Home() {
         console.log(error);
         console.log("vuelve a intentar enviarlo");
       }
+    } else {
+      console.log(storyTitle, textValueToResponse);
+      
     }
     
   }
 
   const _handleSaveStory = async () => {
+    setLoadingAnswer(true);
     const responseStage = await saveStages(
       email,
       storyIdSaved,
@@ -163,10 +183,19 @@ function Home() {
       formatFixTags(agentResponse.nudo),
       formatFixTags(agentResponse.text[0])
     );
+    setLoadingAnswer(false);
+    if (responseStage && responseStage.message === "Cuento guardado") {
+      setStoryTitle('');
+      setTextValueToResponse('');
+      setUserActualStory('');
+      setStage('inicio');
+      setStoryIdSaved('');
+
+    }
     console.log(responseStage);
   }
-  const _handleSetResponse = (e) => {
-    setTextValueToResponse(e.target.value);
+  const _handleSetResponse = (value) => {
+    setTextValueToResponse(value);
   }
 
   useEffect(() => {
@@ -209,7 +238,7 @@ function Home() {
   
   return (
     <div className="root">
-      <Info></Info>
+      <Info email={email}></Info>
       {!loading ? 
         <div className="main_story_container">
           <div className='old_histories_button'>
@@ -295,6 +324,33 @@ function Home() {
                     <p>{agentQuestion}</p>
                   </div>
                 }
+                 <TextField
+                  sx={{
+                    marginTop: '20px',
+                    width: '100%',
+                    '& .MuiOutlinedInput-root': {
+                      '& fieldset': {
+                        borderColor: '#bdddff',
+                        borderWidth: '2px',
+                      },
+                      '&:hover fieldset': {
+                        borderColor: '#bdddff',
+                        borderWidth: '2px',
+                      },
+                      '&.Mui-focused fieldset': {
+                        borderColor: '#87bff8',
+                        borderWidth: '3px',
+                      },
+                    },
+                  }}
+                  label="Titulo"
+                  placeholder='Elige un titulo, este lo puedes cambiar luego.'
+                  value={storyTitle}
+                  onChange={(event) => setStoryTitle(event.target.value)}
+                 ></TextField>
+                 {
+
+                 }
                  {stage !== 'done' ?
                     <>
                       {/**
@@ -326,14 +382,14 @@ function Home() {
                         placeholder='Trata de seguir tu historia con base en la pregunta de Cucú.'
                         rows={4}
                         value={textValueToResponse}
-                        onChange={(e) => _handleSetResponse(e)}
+                        onChange={(e) => _handleSetResponse(e.target.value)}
                       />
                       <br />
                       <br />
                       <Button
                           variant="contained"
                           loading={loadingAnswer}
-                          disabled={textValueToResponse === ''}
+                          disabled={textValueToResponse === '' || storyTitle === ''}
                           style={{
                             marginLeft: '10px'
                           }}
@@ -344,8 +400,10 @@ function Home() {
                     <>
                     <Button
                           variant="contained"
+                          loading={loadingAnswer}
                           style={{
-                            marginLeft: '10px'
+                            marginLeft: '10px',
+                            marginTop: '20px'
                           }}
                           onClick={_handleSaveStory}>
                             Guardar

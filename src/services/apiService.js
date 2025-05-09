@@ -1,9 +1,7 @@
-const API_URL = "http://localhost:5050"; // Cambia esto si tu backend está en otra URL
+const API_URL = "http://54.167.30.72:5050"; // Cambia esto si tu backend está en otra URL
 
 // Función genérica para hacer peticiones POST
 const postRequest = async (endpoint, payload) => {
-  console.log(endpoint, payload);
-  
   try {
     const response = await fetch(`${API_URL}${endpoint}`, {
       method: "POST",
@@ -45,8 +43,8 @@ export const getStoriesByEmail = async (userId) => {
 export const generateFirstImage = async (prompt, userId, storyId, stage) => {
   return postRequest("/api/images/generate-image", { prompt, userId, storyId, stage });
 };
-export const generateFollowedImage = async (imagePath, prompt) => {
-  return postRequest("/api/images/edit-image", { imagePath, prompt });
+export const generateFollowedImage = async (imagePath, prompt, userId, storyId, stage) => {
+  return postRequest("/api/images/edit-image", { imagePath, prompt, userId, storyId, stage });
 };
 export const getQuestionsFromAgent = async (prompt) => {
     return postRequest("/api/images/generate-text", { prompt });
@@ -57,6 +55,10 @@ export const getQuestionsFromAgent = async (prompt) => {
     return {
         "message": "text generated successfully",
         "output": "<inicio>Había una vez una niña llamada Emilie que vivía en un bosque encantado cerca de su pueblo natal, Pitalito. Ese bosque era enorme, tenía muchos animales encantados que hablaban y jugaban al ajedrez. A Emilie le gustaba llevar su tablero de ajedrez para jugar con el sabio gorila, quien en su vida pasada había sido gran maestro de ajedrez. La relación con el sabio gorila era hermosa, de amigos, de rivales que se respetaban.<inicio>.\n<nudo><text>Una vez el <fix>gorila,Gorila<fix> jugó una partida que dejó a Emilie impresionada, la manera en la que jugó no le dio posibilidad de ganar ni una oportunidad. Emilie supo que podía aprender mucho del <fix>gorila,Gorila<fix>, ya que <fix>habia,había<fix> notado que sabía mucho, y así esto le <fix>podia,podía<fix> permitir cumplir su sueño de ser gran maestro de ajedrez.<text><nudo>\n<desenlace><desenlace>\n<q1>¿Emilie le pidió al Gorila que le enseñara sus jugadas favoritas, o se ofreció a ayudarlo a organizar un torneo en el bosque?\n<done>false<done>\n<respuesta><inicio>true: El inicio cumple, presenta bien al personaje, el lugar y la relación, y supera los 200 caracteres.<inicio><nudo>false: El nudo todavía es muy breve y debe profundizarse en el conflicto o reto que enfrenta Emilie.<nudo><desenlace>false: No hay desenlace todavía, debe desarrollarse y superar 200 caracteres.<desenlace></respuesta>"
+    }
+    return {
+      "message": "text generated successfully",
+      "output": "<inicio>Juliana vivía en un bosque encantado. Un día muy soleado del mes de mayo, Juliana decidió ir a la cascada con su amiga la rana, que era enorme, tenía manchas amarillas y sus ojos eran muy grandes. Ellas estaban buscando a su amigo el ratón, el cual llevaba perdido durante 8 días, y estaban muy preocupadas por él.<inicio>.\n<nudo>Cuando llegaron a la cascada, su amigo el ratón estaba oculto arriba de la copa de un árbol, perseguido por un lobo malvado. Cuando ellas llegaron, el lobo se espantó y el ratón pudo volver a bajar.<nudo>.\n<desenlace><text>Ellos estaban felices de volver a estar juntos, se regresaron a su casa felices, corriendo y bailando. Cuando llegaron a la casa, celebraron con torta y bebidas, invitaron a todos los animales del bosque y contaron a todos lo que había pasado. Ellos se pusieron felices porque el ratón había logrado sobrevivir, y estaban juntos de nuevo. Al final de la fiesta el <fix>buho,búho<fix> sabio dijo que la amistad era lo más importante de la vida, y que el <fix>raton,ratón<fix> era afortunado de tener amigos con tanto valor.<text><desenlace>\n<done>true<done>\n<q1>¿Cómo se sintió el ratón al escuchar las palabras del búho sabio? ¿Agradeció a sus amigos o les prometió algo especial?<q1>\n<respuesta><inicio>true: inicio presentado con ambiente, personajes y situación<inicio><nudo>true: nudo presenta el conflicto y explica el reto< nudo><desenlace>true: desenlace resuelve el conflicto, incluye aprendizaje y supera los 200 caracteres<desenlace></respuesta>"
     }
   };
  

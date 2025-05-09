@@ -5,13 +5,13 @@ export function extractTaggedContent(input) {
     desenlace: null,
     text: [],
     fix: [],
-    q1: [],
+    q: [],
     done: [],
     respuesta: {}
   };
 
   // Extraer contenido de <respuesta> y guardarlo por separado
-  const respuestaMatch = input.match(/<respuesta>(.*?)<\/respuesta>/s);
+  const respuestaMatch = input.match(/<respuesta>(.*?)<respuesta>/s);
   const respuestaContent = respuestaMatch ? respuestaMatch[1] : '';
 
   // Extraer contenido de tags <inicio>, <nudo>, <desenlace> fuera de <respuesta>
@@ -25,7 +25,7 @@ export function extractTaggedContent(input) {
   }
 
   // Extraer los demás tags globalmente
-  for (const tag of ['text', 'fix', 'q1', 'done']) {
+  for (const tag of ['text', 'fix', 'q', 'done']) {
     const regex = new RegExp(`<${tag}>(.*?)<${tag}>`, 'gs');
     const matches = [...input.matchAll(regex)].map(m => m[1].trim());
     if (matches.length) result[tag] = matches;

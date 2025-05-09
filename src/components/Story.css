@@ -1,10 +1,10 @@
 .main_story_container{
-  border: 1px solid rgba(255, 255, 255, 0);
   border-radius: 6px;
   height: calc(90vh);
 }
 .image_avatar{
-  width: 90%;
+  height: 100%;
+  height: auto;
   max-height: 200px;
   max-width: 200px;
 }
@@ -22,7 +22,7 @@
   margin: 2vh;
   margin-top: 5px;
   margin-bottom: 5px;
-  height: calc(100vh - 70px);
+  height: calc(100vh - 70px - 30px);
   border-radius: 6px;
   position: relative;
 }
@@ -68,7 +68,7 @@
   line-height: 28px;            /* Matches line spacing */
   font-family: 'Courier New', monospace;
   font-size: 14px;
-  height: calc(80% - 20px - 2px - 30px);
+  height: calc(80% - 20px - 2px - 30px) !important;
   padding: 20px;
   padding-top: 0px;
   margin: 10px;
@@ -86,7 +86,7 @@
 }
 .agent_help_top_container{
   overflow-y: auto;
-  height: calc(100% - 32px);
+  height: calc(100% - 32px - 0px);
   margin: 10px;
   margin-top: 28px;
   background-color: white;
