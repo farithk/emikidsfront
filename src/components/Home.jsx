@@ -62,16 +62,16 @@ function Home() {
               width: '100%',
               '& .MuiOutlinedInput-root': {
                 '& fieldset': {
-                  borderColor: '#bdddff',
-                  borderWidth: '2px',
+                  borderColor: '#56cc43',
+                  borderWidth: '1px',
                 },
                 '&:hover fieldset': {
-                  borderColor: '#bdddff',
-                  borderWidth: '2px',
+                  borderColor: '#56cc43',
+                  borderWidth: '1px',
                 },
                 '&.Mui-focused fieldset': {
-                  borderColor: '#87bff8',
-                  borderWidth: '3px',
+                  borderColor: '#56cc43',
+                  borderWidth: '2px',
                 },
               },
             }}
@@ -82,6 +82,12 @@ function Home() {
         <Button
           variant="outlined"
           type="submit"
+          sx={{
+            color: '#439e34',
+            fontWeight: 'bold',
+            borderColor: '#56cc43',
+            borderWidth: '2px',
+          }}
         >
           Vamos a crear juntos!!
         </Button>
