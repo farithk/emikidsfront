@@ -1,5 +1,5 @@
-const API_URL = "http://54.167.30.72:5050"; // Cambia esto si tu backend está en otra URL
-
+const API_URL = "http://localhost:5050"; // Cambia esto si tu backend está en otra URL
+const API_URL_PROD = "http://54.167.30.72:5050"; 
 // Función genérica para hacer peticiones POST
 const postRequest = async (endpoint, payload) => {
   try {

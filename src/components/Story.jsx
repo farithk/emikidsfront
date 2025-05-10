@@ -60,11 +60,6 @@ function Home() {
   const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
 
-  const _handleChangeTitle = (value) => {
-    console.log(value);
-    
-  }
-
   const _handleSendResponses = async () => {
     if (textValueToResponse !== '' && storyTitle !== '') {
       let prompt = '';

@@ -1,15 +1,23 @@
 .title{
   color: black;
 }
+.title_home_login{
+  font-size: 16px;
+}
 .email_container{
   display: block;
   margin-top: 50px;
   width: 500px; 
-  border: 1px solid rgb(161, 160, 160);
+  background-color: white;
   padding: 20px;
-  margin-left: calc(50% - 250px);
+  margin-left: calc(50% - 270px);
   border-radius: 6px;
   text-align: center;
+  -webkit-box-shadow:3px 3px 3px rgba(0,0,0,.2),0px 0px 6px rgba(0,0,0,.2);
+  -moz-box-shadow:3px 3px 3px rgba(0,0,0,.2),0px 0px 6px rgba(0,0,0,.2);
+  -ms-box-shadow:3px 3px 3px rgba(0,0,0,.2),0px 0px 6px rgba(0,0,0,.2);
+  -o-box-shadow:3px 3px 3px rgba(0,0,0,.2),0px 0px 6px rgba(0,0,0,.2);
+  box-shadow:3px 3px 3px rgba(0,0,0,.2),0px 0px 6px rgba(0,0,0,.2);
   label{
     float: left;
     margin-bottom: 5px;
@@ -19,5 +27,23 @@
   }
 }
 .email_container_input{
-  margin-top: 5px;
+  margin-top: 5px !important;
+}
+
+.home_title_container{
+  width: 300px;
+  margin-left: calc(50% - 150px);
+  margin-top: 30px;
+  .home_image_inner{
+    width: 100%;
+  }
+  p{
+    width: 100%;
+  }
+}
+.home_title_text{
+  width: 50%;
+  margin-left: 25%;
+  text-align: center;
+  font-size: 20px;
 }

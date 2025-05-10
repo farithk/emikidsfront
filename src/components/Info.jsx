@@ -17,11 +17,15 @@ function Info() {
         <div className='header_logo'>
           <img height={50} src={cucuLogo02} alt="" />
         </div>
-        <div className='header_options_container'>
-          <div className='header_options'>
-            <Link className='header_option_link' to={pathToRender === '/mystories' ? `/story?email=${email}`:`/mystories?email=${email}`}>{pathToRender === '/mystories' ? "Crear Historia":"Mis Historias"}</Link>
+        {
+          email !== null && 
+          <div className='header_options_container'>
+            <div className='header_options'>
+              <Link className='header_option_link' to={pathToRender === '/mystories' ? `/story?email=${email}`:`/mystories?email=${email}`}>{pathToRender === '/mystories' ? "Crear Historia":"Mis Historias"}</Link>
+            </div>
           </div>
-        </div>
+        }
+        
           
     </div>
   )

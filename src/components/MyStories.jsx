@@ -83,7 +83,6 @@ function MyStories() {
     let inicio = story.stages.inicio;
     let nudo = story.stages.nudo;
     let desenlace = story.stages.desenlace;
-    console.log(story);
     setSelectedStory(story);
     
     setUserActualStory(inicio+nudo+desenlace);

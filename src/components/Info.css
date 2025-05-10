@@ -1,5 +1,5 @@
 .header_container{
-    background-color: rgb(43, 133, 251);
+    background-color: #AB6BF2;
     width: 100%;
     height: fit-content;
     margin: 0;
@@ -18,16 +18,16 @@
             .header_option_link{
                 text-decoration: none;
                 color: #40591c;
-                background-color: #9ad643;
-                border: 2px solid #9ad643;
+                background-color: #d2f79c;
+                border: 2px solid #d2f79c;
                 padding: 5px;
                 border-radius: 6px;
                 margin: 5px 0px;
             }
             .header_option_link:hover{
                 text-decoration: none;
-                background-color: rgb(135, 202, 97);
-                border: 2px solid rgb(135, 202, 97);
+                background-color: #b8d887;
+                border: 2px solid #b8d887;
             }
         }
     }
