@@ -216,7 +216,6 @@
     transition: transform 0.3s ease-in-out;
     box-shadow: -2px 0 10px rgba(0,0,0,0.2);
     background-color: rgb(234, 235, 236);
-    border: 1px solid red;
   }
 
   .main_story_right.open {
@@ -237,7 +236,6 @@
   .agent_help_top_container{
     height: calc(100% - 110px);
     padding-top: 0;
-    border: 1px solid red;
   }
 
 
