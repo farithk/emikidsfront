@@ -165,7 +165,6 @@ function Home() {
       }
     } else {
       console.log(storyTitle, textValueToResponse);
-      
     }
     
   }
@@ -399,6 +398,7 @@ function Home() {
                           variant="contained"
                           loading={loadingAnswer}
                           style={{
+                            zIndex: '1000',
                             marginLeft: '10px',
                             marginTop: '20px'
                           }}

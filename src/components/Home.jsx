@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { enterByEmail } from "../services/apiService";
-import cucuLogo02 from '../assets/cucuLogo02.png';
+import cucuLogo02 from '../assets/cucuFrog.png';
+import cucuLogo from '../assets/cuculogo.png';
 import Button from '@mui/material/Button';
 import Input from '@mui/joy/Input';
 import Info from './Info.jsx';
@@ -40,6 +41,7 @@ function Home() {
   return (
     <div className='root'>
       <Info email={email}></Info>
+      <>
       <div className='home_title_container'>
         <img className='home_image_inner' src={cucuLogo02} alt="" />
       </div>
@@ -92,6 +94,8 @@ function Home() {
           Vamos a crear juntos!!
         </Button>
       </form>
+      </>
+     
     </div>
   )
 }

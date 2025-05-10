@@ -30,8 +30,8 @@
 }
 
 .home_title_container{
-  width: 300px;
-  margin-left: calc(50% - 150px);
+  width: 200px;
+  margin-left: calc(50% - 100px);
   margin-top: 30px;
   .home_image_inner{
     width: 100%;
@@ -45,4 +45,19 @@
   margin-left: 25%;
   text-align: center;
   font-size: 20px;
+}
+
+/* Mobile Style */
+@media (max-width: 768px) {
+  .email_container{
+    width: 80%;
+    margin-left: 5%;
+    margin-bottom: 50px;
+  }
+  .home_title_text{
+    width: 80%;
+    margin-left: 10%;
+    text-align: center;
+    font-size: 18px;
+  }
 }
