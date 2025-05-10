@@ -38,3 +38,54 @@
     height: calc(100% - 10px);
     margin-right: 10px;
   }
+
+
+  .main_story_right_stories{
+    width: 50%;
+    margin: 0px 6px;
+    height: calc(100% - 60px);
+    border-radius: 6px;
+  }
+
+  .main_story_left_text_mystories {
+    background-color: white;
+    line-height: 28px;            /* Matches line spacing */
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    height: calc(80% - 20px - 2px - 30px) !important;
+    padding: 20px;
+    padding-top: 0px;
+    margin: 10px;
+    border-radius: 8px;
+    white-space: pre-wrap;
+    overflow-y: auto;
+    
+  }
+  /* Para Chrome, Safari y otros WebKit */
+  .main_story_left_text_mystories::-webkit-scrollbar {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .main_story_left_text_mystories {
+        margin-left: 10px;
+        height: calc(-280px + 100%) !important;
+    }
+    .main_story_right_stories {
+        position: fixed;
+        bottom: 1vh;
+        right: 0;
+        width: 97%;
+        height: 100vh;
+        z-index: 1000;
+        transform: translateY(5%);
+        transition: transform 0.3s ease-in-out;
+        box-shadow: -2px 0 10px rgba(0,0,0,0.2);
+        background-color: rgb(234, 235, 236);
+        font-size: 14px;
+    }
+
+    .main_story_right_stories.open {
+        transform: translateY(calc(-100px + 100%));
+    }
+  }

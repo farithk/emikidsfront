@@ -6,6 +6,8 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Info from './Info.jsx';
 import ModalText from './ModalText.jsx';
 import tommyAvatar from '../assets/cucuFrog.png';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 import { extractTaggedContent, formatFixTags, removeFixTags } from '../utils/extractTagsFromPrompt.js';
 
@@ -286,13 +288,50 @@ function Home() {
             
 
             {/* Right panel becomes modal on mobile */}
+            <div className='action_to_open'>
+              {agentQuestion && stage !== 'done' &&
+                <div>
+                  <p>{agentQuestion}</p>
+                </div>
+              }
+            <TextField
+                className=''
+                disabled={loadingAnswer}
+                sx={{
+                  marginTop: '20px',
+                  width: '100%',
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': {
+                      borderColor: '#bdddff',
+                      borderWidth: '2px',
+                    },
+                    '&:hover fieldset': {
+                      borderColor: '#bdddff',
+                      borderWidth: '2px',
+                    },
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#87bff8',
+                      borderWidth: '3px',
+                    },
+                    '& input::placeholder': {
+                      fontSize: '16px',
+                    },
+                  },
+                }}
+                id="outlined-multiline-static"
+                label=""
+                placeholder='Continua escribiendo'
+                value={textValueToResponse}
+                onClick={() => setIsModalOpen(false)}
+              />
+            </div>
             <div className={`main_story_right ${isModalOpen ? "open" : ""}`}>
               {isMobile && (
                 <button
                   className="toggle-button"
                   onClick={isModalOpen ? handleCloseModal : handleOpenModal}
                 >
-                  {isModalOpen ? ">" : "<"}
+                  {!isModalOpen ? <KeyboardArrowDownIcon size={20}/> : <></> }
                 </button>
               )}
               <div className='agent_help_top_container'>
@@ -337,6 +376,9 @@ function Home() {
                         borderColor: '#87bff8',
                         borderWidth: '3px',
                       },
+                      '& input::placeholder': {
+                        fontSize: isMobile ? '14px' : '16px',
+                      },
                     },
                   }}
                   label="Titulo"
@@ -369,6 +411,9 @@ function Home() {
                             '&.Mui-focused fieldset': {
                               borderColor: '#87bff8',
                               borderWidth: '3px',
+                            },
+                            '& textarea::placeholder': {
+                              fontSize: isMobile ? '14px' : '16px',
                             },
                           },
                         }}

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useLocation } from "react-router-dom";
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import Info from './Info.jsx';
 
 import {
@@ -130,20 +132,20 @@ function MyStories() {
               </>
             </div>
             <div className='story_title_container'>Mi cuento en palabras</div>
-            <div className="main_story_left_text" id='notebook-paper'>
+            <div className="main_story_left_text_mystories" id='notebook-paper'>
               <div id='content'>
                 <div dangerouslySetInnerHTML={{ __html: userActualStory }} />
               </div>
             </div>
           </div>
           {/* Right panel becomes modal on mobile */}
-          <div className={`main_story_right ${isModalOpen ? "open" : ""}`}>
+          <div className={`main_story_right_stories ${isModalOpen ? "open" : ""}`}>
               {isMobile && (
                 <button
                   className="toggle-button"
                   onClick={isModalOpen ? handleCloseModal : handleOpenModal}
                 >
-                  {isModalOpen ? ">" : "<"}
+                  {isModalOpen ? <KeyboardArrowUpIcon/> : <KeyboardArrowDownIcon />}
                 </button>
               )}
               <div className='agent_help_top_container'>
