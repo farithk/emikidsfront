@@ -1,5 +1,14 @@
 .story_item_container{
     border:1px solid rgb(222, 222, 222);
+    background-color: white;
+    padding: 10px;
+    border-radius: 6px;
+    display: flex;
+    margin-bottom: 10px;
+}
+.story_item_container_selected{
+    border: 1px solid rgb(222, 222, 222);
+    background-color: rgb(222, 222, 222);
     padding: 10px;
     border-radius: 6px;
     display: flex;

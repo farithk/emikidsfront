@@ -155,7 +155,7 @@ function MyStories() {
                         return(
                           <div
                             key={index}
-                            className='story_item_container'
+                            className={selectedStory.id === story.id ? 'story_item_container_selected':'story_item_container'}
                             onClick={() => _handleStorySelected(story)}
                           >
                             <div className='story_item_inner'>
