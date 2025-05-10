@@ -22,6 +22,7 @@ import './Story.css'
 
 function Home() {
   const location = useLocation();
+  const navigate = useNavigate();
   const queryParams = new URLSearchParams(location.search);
   const email = queryParams.get("email");
 
@@ -185,6 +186,7 @@ function Home() {
       setUserActualStory('');
       setStage('inicio');
       setStoryIdSaved('');
+      navigate(`/mystories?email=${email}`)
 
     }
     console.log(responseStage);
