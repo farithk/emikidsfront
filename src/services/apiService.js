@@ -3,7 +3,7 @@ const API_URL_PROD = "https://8561-54-167-30-72.ngrok-free.app";
 // Función genérica para hacer peticiones POST
 const postRequest = async (endpoint, payload) => {
   try {
-    const response = await fetch(`${API_URL}${endpoint}`, {
+    const response = await fetch(`${API_URL_PROD}${endpoint}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
