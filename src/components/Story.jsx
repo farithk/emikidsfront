@@ -150,7 +150,8 @@ function Home() {
             storyIdSaved,
             formatFixTags(responseFormat.inicio),
             formatFixTags(responseFormat.nudo),
-            formatFixTags(responseFormat.desenlace)
+            formatFixTags(responseFormat.desenlace),
+            storyTitle
           );
           console.log(responseStage);
         }
@@ -178,7 +179,8 @@ function Home() {
       storyIdSaved,
       formatFixTags(agentResponse.inicio),
       formatFixTags(agentResponse.nudo),
-      formatFixTags(agentResponse.text[0])
+      formatFixTags(agentResponse.text[0]),
+      storyTitle
     );
     setLoadingAnswer(false);
     if (responseStage && responseStage.message === "Cuento guardado") {

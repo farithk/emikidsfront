@@ -3,7 +3,7 @@ const API_URL_PROD = "https://8561-54-167-30-72.ngrok-free.app";
 // Función genérica para hacer peticiones POST
 const postRequest = async (endpoint, payload) => {
   try {
-    const response = await fetch(`${API_URL_PROD}${endpoint}`, {
+    const response = await fetch(`${API_URL}${endpoint}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -32,8 +32,8 @@ export const saveStory = async (userId, title) => {
   return postRequest("/api/stories", { userId, title });
 };
 //guardar stages
-export const saveStages = async (userId, storyId, inicio, nudo, desenlace) => {
-  return postRequest("/api/stages", { userId, storyId, inicio, nudo, desenlace });
+export const saveStages = async (userId, storyId, inicio, nudo, desenlace, title) => {
+  return postRequest("/api/stages", { userId, storyId, inicio, nudo, desenlace, title });
 };
 // Obtener todas las historias por email
 export const getStoriesByEmail = async (userId) => {
